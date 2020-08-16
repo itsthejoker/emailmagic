@@ -123,6 +123,9 @@ Array.from(
 ).forEach(
     function (el, index) {
         if (el.href.indexOf("mailto") !== -1) {
+            // If it's a mailto link, break it apart, then generate a modal
+            // for each mailto link. Stick that modal at the bottom of the
+            // document and let it chill out until it's called for.
             let id = createID();
             let newModal = getModalContent(id, ...parseMailto(el.href))
             document.body.insertAdjacentHTML("beforeend", newModal)
