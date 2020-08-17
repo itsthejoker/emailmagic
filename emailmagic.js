@@ -99,7 +99,7 @@ function createID() {
 }
 
 function magic(e, id) {
-    // Don't let the browser actually start the email opening process
+    // Don't let the browser actually start the email opening process.
     e.preventDefault();
     // everything in here should be a jquery object of each modal, so we can
     // just grab it off global scope.
