@@ -21,6 +21,34 @@
  * SOFTWARE.
  */
 
+Array.from(
+    document.getElementsByTagName('a')
+).forEach(
+    function (el, index) {
+        if (el.href.indexOf("mailto") !== -1) {
+            // If it's a mailto link, break it apart, then generate a modal
+            // for each mailto link. Stick that modal at the bottom of the
+            // document and let it chill out until it's called for.
+            let id = createID();
+            let newModal = getModalContent(id, ...parseMailto(el.href));
+            document.body.insertAdjacentHTML("beforeend", newModal);
+
+            memo = window.emailmagic || {};
+            // todo: swap out for vanilla js with bootstrap 5
+            // jquery is already here because this is for bootstrap and
+            // bootstrap 4 requires it.
+            memo[`${id}`] = $(`#emailmagic-${id}`);
+
+            el.addEventListener(
+                'click', function (e) {
+                    magic(e, id);
+                }
+            );
+            window.emailmagic = memo;
+        }
+    }
+);
+
 function getModalContent(id, emailAddress, subject, cc, bcc, body) {
     return `
         <div class="modal fade" id="emailmagic-${id}" tabindex="-1" role="dialog" aria-labelledby="Select your preferred email provider!" aria-hidden="true">
@@ -73,12 +101,9 @@ function createID() {
 function magic(e, id) {
     // Don't let the browser actually start the email opening process
     e.preventDefault();
-    // is this actually necessary? Not sure.
-    e.stopPropagation();
-    // todo: swap out for vanilla js with bootstrap 5
-    // jquery is already here because this is for bootstrap and
-    // bootstrap 4 requires it.
-    $(`#emailmagic-${id}`).modal()
+    // everything in here should be a jquery object of each modal, so we can
+    // just grab it off global scope.
+    window.emailmagic[`${id}`].modal();
 }
 
 function parseMailto(href) {
@@ -113,27 +138,7 @@ function parseMailto(href) {
         });
 
     } else {
-        emailAddress = cleanedData
+        emailAddress = cleanedData;
     }
     return [emailAddress, subject, cc, bcc, body]
 }
-
-Array.from(
-    document.getElementsByTagName('a')
-).forEach(
-    function (el, index) {
-        if (el.href.indexOf("mailto") !== -1) {
-            // If it's a mailto link, break it apart, then generate a modal
-            // for each mailto link. Stick that modal at the bottom of the
-            // document and let it chill out until it's called for.
-            let id = createID();
-            let newModal = getModalContent(id, ...parseMailto(el.href))
-            document.body.insertAdjacentHTML("beforeend", newModal)
-            el.addEventListener(
-                'click', function (e) {
-                    magic(e, id)
-                }
-            );
-        }
-    }
-);
