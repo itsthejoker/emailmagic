@@ -21,31 +21,32 @@
  * SOFTWARE.
  */
 
-Array.from(
-    document.getElementsByTagName('a')
-).forEach(
+const anchorElements = document.getElementsByTagName('a');
+const modalElements = {};
+
+Array.from(anchorElements).forEach(
     function (el, index) {
-        if (el.href.indexOf("mailto") !== -1) {
-            // If it's a mailto link, break it apart, then generate a modal
-            // for each mailto link. Stick that modal at the bottom of the
-            // document and let it chill out until it's called for.
-            let id = createID();
-            let newModal = getModalContent(id, ...parseMailto(el.href));
-            document.body.insertAdjacentHTML("beforeend", newModal);
+        // don't run on a tags that aren't mail links
+        if (el.href.indexOf("mailto") === -1) return;
 
-            memo = window.emailmagic || {};
-            // todo: swap out for vanilla js with bootstrap 5
-            // jquery is already here because this is for bootstrap and
-            // bootstrap 4 requires it.
-            memo[`${id}`] = $(`#emailmagic-${id}`);
+        // If it's a mailto link, break it apart, then generate a modal
+        // for each mailto link. Stick that modal at the bottom of the
+        // document and let it chill out until it's called for.
+        const id = createID();
+        const newModal = getModalContent(id, ...parseMailto(el.href));
+        document.body.insertAdjacentHTML("beforeend", newModal);
 
-            el.addEventListener(
-                'click', function (e) {
-                    magic(e, id);
-                }
-            );
-            window.emailmagic = memo;
-        }
+        // todo: swap out for vanilla js with bootstrap 5
+        // jquery is already here because this is for bootstrap and
+        // bootstrap 4 requires it.
+        modalElements[id] = $(`#emailmagic-${id}`);
+
+        el.addEventListener(
+            'click', function (e) {
+                magic(e, id);
+            }
+        );
+
     }
 );
 
@@ -103,7 +104,7 @@ function magic(e, id) {
     e.preventDefault();
     // everything in here should be a jquery object of each modal, so we can
     // just grab it off global scope.
-    window.emailmagic[`${id}`].modal();
+    modalElements[id].modal();
 }
 
 function parseMailto(href) {
