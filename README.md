@@ -10,7 +10,7 @@ I recently saw two new options for handling `mailto:` links: https://mailgo.dev/
 
 ### So I did.
 
-I use Bootstrap for most everything, and overal UI unity is important to me. Rather than try to bend one of the pre-existing solutions to my will, I decided to try and reimplement from the ground up. Here are some thoughts on the two solutions I found:
+I use Bootstrap for most everything, and overall UI unity is important to me. Rather than try to bend one of the pre-existing solutions to my will, I decided to try and reimplement from the ground up. Here are some thoughts on the two solutions I found:
 
 mailgo:
 
