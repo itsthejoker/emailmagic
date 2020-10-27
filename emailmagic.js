@@ -35,15 +35,13 @@ anchorElements.forEach(el => {
         const newModal = getModalContent({id, ...parseMailto(el.href)});
         document.body.insertAdjacentHTML("beforeend", newModal);
 
-        // todo: swap out for vanilla js with bootstrap 5
-        // jquery is already here because this is for bootstrap and
-        // bootstrap 4 requires it.
-        modalElements[id] = $(`#emailmagic-${id}`);
+        // bootstrap 5 only
+        modalElements[id] = new bootstrap.Modal(document.getElementById(`emailmagic-${id}`));
 
         el.addEventListener(
             'click', e => {
                 e.preventDefault();
-                modalElements[id].modal();
+                modalElements[id].show();
             }
         );
 
@@ -57,9 +55,7 @@ function getModalContent({id, emailAddress, subject, cc, bcc, body}) {
             <div class="modal-content">
               <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLongTitle">Open email in...</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
                 <a 
@@ -90,7 +86,7 @@ function getModalContent({id, emailAddress, subject, cc, bcc, body}) {
     `
 }
 
-function copyToClipboard(val){
+function copyToClipboard(val) {
     navigator.clipboard.writeText(val);
 }
 
