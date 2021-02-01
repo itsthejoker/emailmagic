@@ -50,7 +50,7 @@ anchorElements.forEach(el => {
 
 function getModalContent({id, emailAddress, subject, cc, bcc, body}) {
     return `
-        <div class="modal fade" id="emailmagic-${id}" tabindex="-1" role="dialog" aria-labelledby="Select your preferred email provider!" aria-hidden="true">
+        <div class="modal fade" id="emailmagic-${id}" tabindex="-1" role="dialog" aria-label="Select your preferred email provider!" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
             <div class="modal-content">
               <div class="modal-header">
@@ -58,12 +58,12 @@ function getModalContent({id, emailAddress, subject, cc, bcc, body}) {
                 <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                <a 
+                <a
                   href="https://mail.google.com/mail/?view=cm&fs=1&to=${emailAddress}&su=${subject}&cc=${cc}&bcc=${bcc}&body=${body}"
                   class="btn btn-block btn-outline-danger"
                   target="_blank"
                 >Gmail</a>
-                <a 
+                <a
                   href="https://outlook.office.com/owa/?path=/mail/action/compose&to=${emailAddress}&subject=${subject}&body=${body}"
                   class="btn btn-block btn-outline-primary"
                   target="_blank"
