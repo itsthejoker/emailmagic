@@ -1,6 +1,6 @@
 # emailmagic
 
-Take a `mailto:` link and make it better! Instead of just letting the browser deal with it, give your users a bit of a choice as to what system to use. Uses Bootstrap 4 -- if you want to style it a different way, just save `emailmagic.js` in your project and tweak `getModalContent`. BTW, the original usage of the `mailto:` link stays the same, so if this fails to load for some reason the link will follow the default behavior.
+Take a `mailto:` link and make it better! Instead of just letting the browser deal with it, give your users a bit of a choice as to what system to use. Uses Bootstrap 5 -- if you want to style it a different way, just save `emailmagic.js` in your project and tweak `getModalContent`. BTW, the original usage of the `mailto:` link stays the same, so if this fails to load for some reason the link will follow the default behavior.
 
 <p align="center">
     <img width="307" height="423" src="https://raw.githubusercontent.com/itsthejoker/emailmagic/master/images/openemailin.png">
