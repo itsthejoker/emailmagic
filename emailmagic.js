@@ -53,30 +53,32 @@ function getModalContent({id, emailAddress, subject, cc, bcc, body}) {
             <div class="modal-content">
               <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLongTitle">Open email in...</h5>
-                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
               </div>
               <div class="modal-body">
-                <a
-                  href="https://mail.google.com/mail/?view=cm&fs=1&to=${emailAddress}&su=${subject}&cc=${cc}&bcc=${bcc}&body=${body}"
-                  class="btn btn-block btn-outline-danger"
-                  target="_blank"
-                >Gmail</a>
-                <a
-                  href="https://outlook.office.com/owa/?path=/mail/action/compose&to=${emailAddress}&subject=${subject}&body=${body}"
-                  class="btn btn-block btn-outline-primary"
-                  target="_blank"
-                >Outlook</a>
-                <a
-                  href="https://compose.mail.yahoo.com/?to=${emailAddress}&subject=${subject}&cc=${cc}&bcc=${bcc}&body=${body}"
-                  class="btn btn-block btn-outline-success"
-                  target="_blank"
-                >Yahoo! Mail</a>
-                <a href="mailto:${emailAddress}" class="btn btn-block btn-outline-info" target="_blank">Default</a>
-                <hr/>
-                <button class="btn btn-block btn-outline-dark" onclick="copyToClipboard('${emailAddress}')">Copy to Clipboard</button>
+                <div class="d-grid gap-2">
+                    <a
+                      href="https://mail.google.com/mail/?view=cm&fs=1&to=${emailAddress}&su=${subject}&cc=${cc}&bcc=${bcc}&body=${body}"
+                      class="btn btn-outline-danger"
+                      target="_blank"
+                    >Gmail</a>
+                    <a
+                      href="https://outlook.office.com/owa/?path=/mail/action/compose&to=${emailAddress}&subject=${subject}&body=${body}"
+                      class="btn btn-outline-primary"
+                      target="_blank"
+                    >Outlook</a>
+                    <a
+                      href="https://compose.mail.yahoo.com/?to=${emailAddress}&subject=${subject}&cc=${cc}&bcc=${bcc}&body=${body}"
+                      class="btn btn-outline-success"
+                      target="_blank"
+                    >Yahoo! Mail</a>
+                    <a href="mailto:${emailAddress}" class="btn btn-block btn-outline-info" target="_blank">Default</a>
+                    <hr/>
+                    <button class="btn btn-outline-dark" onclick="copyToClipboard('${emailAddress}')">Copy to Clipboard</button>
+                </div>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
               </div>
             </div>
           </div>
