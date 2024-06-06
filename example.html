@@ -9,7 +9,7 @@
 </head>
 
 <body>
-<div class="container text-center">
+<div class="container text-center" id="container">
     <h1>Make those pesky mailto links be useful for once.</h1>
     <h3>Try it below! Uses Bootstrap 5.</h3>
     <p class="mt-5">
@@ -20,5 +20,22 @@
            href="mailto:joe@example.com?cc=tom@example.com,dick@example.com&subject=Something&body=Hmm...&bcc=larry@example.com">What
             if we make it more complicated?</a>
     </p>
+    <p>
+        <button class="btn btn-secondary" onclick="add_example_mailto_link()">Add a mailto link</button>
+    </p>
 </div>
+
+<script>
+    function add_example_mailto_link() {
+        let p = document.createElement('p');
+        let mailto_link = document.createElement('a');
+        mailto_link.href = 'mailto:hi@example.com';
+        mailto_link.innerText = 'Email me!';
+        mailto_link.classList.add('btn', 'btn-primary');
+        p.appendChild(mailto_link);
+        document.getElementById("container").appendChild(p);
+
+        emailMagic();
+    }
+</script>
 </body>

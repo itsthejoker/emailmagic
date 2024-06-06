@@ -21,13 +21,14 @@
  * SOFTWARE.
  */
 
-document.addEventListener("DOMContentLoaded", function (event) {
+function emailMagic() {
     const anchorElements = Array.from(document.querySelectorAll('a'));
     const modalElements = {};
 
     anchorElements.forEach(el => {
         // don't run on a tags that aren't mail links
         if (el.href.includes("mailto") === false) return;
+        if (el.dataset.emailmagic) return;  // we've already done this one
 
         // If it's a mailto link, break it apart, then generate a modal
         // for each mailto link. Stick that modal at the bottom of the
@@ -39,14 +40,20 @@ document.addEventListener("DOMContentLoaded", function (event) {
         // bootstrap 5 only
         modalElements[id] = new bootstrap.Modal(document.getElementById(`emailmagic-${id}`));
 
+        el.dataset.emailmagic = id;
+
         el.addEventListener('click', e => {
             e.preventDefault();
             modalElements[id].show();
         });
     });
+}
+
+document.addEventListener("DOMContentLoaded", function (event) {
+    emailMagic()
 });
 
-function getModalContent({id, emailAddress, subject, cc, bcc, body}) {
+function getModalContent({id, emailAddress, subject, cc, bcc, body, fullMailTo}) {
     return `
         <div class="modal fade" id="emailmagic-${id}" tabindex="-1" role="dialog" aria-label="Select your preferred email provider!" aria-hidden="true">
           <div class="modal-dialog modal-dialog-centered modal-sm" role="document">
@@ -104,5 +111,6 @@ function parseMailto(href) {
         cc: mailto.searchParams.get("cc") || "",
         bcc: mailto.searchParams.get("bcc") || "",
         body: mailto.searchParams.get("body") || "",
+        fullMailTo: mailto
     }
 }
