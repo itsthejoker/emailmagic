@@ -72,9 +72,9 @@ function getModalContent({id, emailAddress, subject, cc, bcc, body}) {
                       class="btn btn-outline-success"
                       target="_blank"
                     >Yahoo! Mail</a>
-                    <a href="mailto:${emailAddress}" class="btn btn-block btn-outline-info" target="_blank">Default</a>
+                    <a href="${fullMailTo}" class="btn btn-block btn-outline-info" target="_blank">Default</a>
                     <hr/>
-                    <button class="btn btn-outline-dark" onclick="copyToClipboard('${emailAddress}')">Copy to Clipboard</button>
+                    <button class="btn btn-outline-dark" onclick="copyToClipboard('${fullMailTo}')">Copy to Clipboard</button>
                 </div>
               </div>
               <div class="modal-footer">
